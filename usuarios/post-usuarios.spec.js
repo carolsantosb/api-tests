@@ -1,5 +1,6 @@
 const faker = require('faker')
 const testServer = require('../utils/testServer')
+const { report } = require('../utils/testServer')
 
 const rotaUsuarios = '/usuarios'
 
@@ -15,6 +16,6 @@ describe('Criar um usuário através da rota POST', () => {
     const response = await testServer.post(rotaUsuarios)
       .send(novoUsuarioSucesso)
     expect(response.status).toBe(201)
-    expect(response.body.message).toBe('Cadastro realizado com sucesso')
+    expect(response.body).toHaveProperty('message', 'Cadastro realizado com sucesso')
   })
 })
