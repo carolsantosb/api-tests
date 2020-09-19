@@ -10,14 +10,14 @@ const usuario = {
   administrador: `${faker.random.boolean()}`
 }
 
-describe('Editar um usuário através da rota PUT', () => {
-  it('Editar um usuário com sucesso', async () => {
+describe('Excluir um usuário através da rota DELETE', () => {
+  it('Excluir um usuário com sucesso', async () => {
     const response = await testServer.post(rotaUsuarios)
       .send(usuario)
     expect(response.status).toBe(201)
-    const responseEdit = await testServer.put(`${rotaUsuarios}/${response.body._id}`)
+    const responseDelete = await testServer.delete(`${rotaUsuarios}/${response.body._id}`)
       .send(usuario)
-    expect(responseEdit.status).toBe(200)
-    expect(responseEdit.body.message).toBe('Registro alterado com sucesso')
+    expect(responseDelete.status).toBe(200)
+    expect(responseDelete.body.message).toBe('Registro excluído com sucesso')
   })
 })
