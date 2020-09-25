@@ -1,16 +1,15 @@
-const faker = require('faker')
 const testServer = require('../utils/testServer')
+const { criarUsuario } = require('../utils/index')
 
 const rotaUsuarios = '/usuarios'
 
-const usuario = {
-  nome: faker.name.firstName() + ' ' + faker.name.lastName(),
-  email: faker.internet.email(),
-  password: faker.internet.password(),
-  administrador: `${faker.random.boolean()}`
-}
 
 describe('Editar um usuário através da rota PUT', () => {
+  let usuario
+  beforeEach( () => {
+    usuario = criarUsuario();
+  });
+  
   it('Editar um usuário com sucesso', async () => {
     const response = await testServer.post(rotaUsuarios)
       .send(usuario)
