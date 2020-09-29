@@ -1,16 +1,14 @@
 const faker = require('faker')
 const testServer = require('../utils/testServer')
+const { criarUsuario } = require('../utils/index')
 
 const rotaUsuarios = '/usuarios'
 
-const usuario = {
-  nome: faker.name.firstName() + ' ' + faker.name.lastName(),
-  email: faker.internet.email(),
-  password: faker.internet.password(),
-  administrador: `${faker.random.boolean()}`
-}
-
 describe('Excluir um usuário através da rota DELETE', () => {
+  let usuario
+  beforeEach( async () => {
+    usuario = await criarUsuario();
+  });
   it('Excluir um usuário com sucesso', async () => {
     const response = await testServer.post(rotaUsuarios)
       .send(usuario)

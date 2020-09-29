@@ -1,6 +1,5 @@
 const testServer = require('../utils/testServer')
-const { criarProduto } = require('../utils/index')
-const { criarUsuario } = require('../utils/index')
+const { criarProduto, criarUsuario } = require('../utils/index')
 
 const rotaLogin = '/login'
 const rotaUsuarios = '/usuarios'
@@ -18,16 +17,14 @@ describe('Cadastrar produtos através da rota POST', () => {
         email: usuario.email,
         password: usuario.password
         }) 
-     token = (login.body.authorization)
+     return token = (login.body.authorization)
     });
-    console.log(usuario)
     it('Cadastar produtos', async () => {    
         const response = await testServer.post(rotaProdutos)
         .set({
           Authorization: token
         })
         .send(produto)
-        console.log(response)
         expect(response.status).toBe(201)
         expect(response.body.message).toBe('Cadastro realizado com sucesso')
         expect(response.body._id).toBe(response.body._id)
