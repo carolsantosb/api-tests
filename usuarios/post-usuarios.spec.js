@@ -1,6 +1,5 @@
 const faker = require('faker')
 const testServer = require('../utils/testServer')
-const criarUsuario = require('../utils/testServer')
 
 const rotaUsuarios = '/usuarios'
 
