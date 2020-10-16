@@ -1,11 +1,11 @@
 const testServer = require('../utils/testServer')
-const { criarProduto, criarUsuario } = require('../utils/index')
+const { criarProduto, criarUsuario, excluirProduto } = require('../utils/index')
 
 const rotaLogin = '/login'
 const rotaProdutos = '/produtos'
 
 describe('Cadastrar produtos através da rota POST', () => {
-  let usuario, produto, token
+  let usuario, produto, token, produtoExcluido
   beforeEach(async () => {
     produto = await criarProduto()
     usuario = await criarUsuario({ administrador: 'true' })
@@ -15,8 +15,13 @@ describe('Cadastrar produtos através da rota POST', () => {
           email: usuario.email,
           password: usuario.password
         })
-    return token = (login.body.authorization)
+    token = (login.body.authorization)
+    return token
   })
+  afterEach(async () => {
+    produtoExcluido = await excluirProdutoo()
+  })
+  
   it('Cadastar produtos', async () => {
     const response = await testServer.post(rotaProdutos)
       .set({

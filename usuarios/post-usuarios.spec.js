@@ -1,6 +1,6 @@
 const faker = require('faker')
 const testServer = require('../utils/testServer')
-const { report } = require('../utils/testServer')
+const { excluirUsuario } = require('../utils/index')
 
 const rotaUsuarios = '/usuarios'
 
@@ -12,6 +12,10 @@ const novoUsuarioSucesso = {
 }
 
 describe('Criar um usuário através da rota POST', () => {
+  let usuarioExcluido
+  afterAll(async () => {
+    usuarioExcluido = await excluirUsuario()
+  })
   it('Cadastrar um novo usuário com sucesso', async () => {
     const response = await testServer.post(rotaUsuarios)
       .send(novoUsuarioSucesso)
