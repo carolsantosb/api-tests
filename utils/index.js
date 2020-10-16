@@ -1,7 +1,7 @@
 const faker = require('faker')
 const testServer = require('../utils/testServer')
 
-async function criarUsuario () {
+async function criarUsuario() {
   const rotaUsuarios = '/usuarios'
   const usuario = {
     nome: faker.name.firstName() + ' ' + faker.name.lastName(),
@@ -16,7 +16,14 @@ async function criarUsuario () {
   return usuarioDados.body.usuarios[0]
 }
 
-function criarProduto () {
+async function excluirUsuario() {
+  const rotaUsuarios = '/usuarios'
+  const usuarioExcluido = await testServer.delete(`${rotaUsuarios}/${usuario._id}`)
+      .send(usuario)
+    expect(usuarioExcluido.status).toBe(200)
+}
+
+function criarProduto (){
   return {
     nome: faker.lorem.words(),
     preco: faker.random.number(),
@@ -25,4 +32,11 @@ function criarProduto () {
   }
 }
 
-module.exports = { criarUsuario, criarProduto }
+async function excluirProduto() {
+  const rotaProdutos = '/produtos'
+  const produtoExcluido = await testServer.delete(`${rotaProdutos}/${produto._id}`)
+      .send(produto)
+    expect(produtoExcluido.status).toBe(200)
+}
+
+module.exports = { criarUsuario, criarProduto, excluirUsuario, excluirProduto }
