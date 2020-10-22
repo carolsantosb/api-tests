@@ -5,7 +5,7 @@ const usuarioFixo = require('../utils/data.json')
 const rotaUsuarios = '/usuarios'
 
 describe('Editar um usuário através da rota PUT', () => {
-  let usuario, usuarioExcluido
+  let usuario
   beforeAll(async () => {
     usuario = await criarUsuario()
   })

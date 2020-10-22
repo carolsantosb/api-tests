@@ -12,7 +12,6 @@ const novoUsuarioSucesso = {
 }
 
 describe('Criar um usuário através da rota POST', () => {
-  let usuarioExcluido
   afterAll(async () => {
     usuarioExcluido = await excluirUsuario()
   })
