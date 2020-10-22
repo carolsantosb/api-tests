@@ -5,7 +5,7 @@ const rotaLogin = '/login'
 const rotaProdutos = '/produtos'
 
 describe('Cadastrar produtos através da rota POST', () => {
-  let usuario, produto, token, produtoExcluido
+  let usuario, produto, token 
   beforeEach(async () => {
     produto = await criarProduto()
     usuario = await criarUsuario({ administrador: 'true' })
@@ -19,9 +19,9 @@ describe('Cadastrar produtos através da rota POST', () => {
     return token
   })
   afterEach(async () => {
-    produtoExcluido = await excluirProdutoo()
+    produtoExcluido = await excluirProduto()
   })
-  
+
   it('Cadastar produtos', async () => {
     const response = await testServer.post(rotaProdutos)
       .set({
