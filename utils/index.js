@@ -29,13 +29,17 @@ function criarProduto () {
     nome: faker.lorem.words(),
     preco: faker.random.number(),
     descricao: faker.lorem.paragraph(),
-    quantidade: faker.random.number()
+    quantidade: 1
   }
 }
 
-async function excluirProduto () {
+async function excluirProduto (token, id_produto) {
+  let produto
   const rotaProdutos = '/produtos'
-  const produtoExcluido = await testServer.delete(`${rotaProdutos}/${produto._id}`)
+  const produtoExcluido = await testServer.delete(`${rotaProdutos}/${id_produto}`)
+    .set({
+      Authorization: token
+    })
     .send(produto)
   expect(produtoExcluido.status).toBe(200)
 }
