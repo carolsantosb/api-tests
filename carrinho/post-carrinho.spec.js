@@ -25,16 +25,17 @@ describe('Cadastrar carrinho através da rota POST', () => {
         Authorization: token
       })
       .send(produto)
-    return produtoCriado
+    produto_id = produtoCriado.body._id
   })
+
   it('Cadastar carrinho', async () => {
     const response = await testServer.post(rotaCarrinhos)
       .set({
         Authorization: token
       })
       .send({
-        produtoCriado: [{
-          idProduto: produto._id,
+        produtos: [{
+          idProduto: produto_id,
           quantidade: 1
         }]
       })
