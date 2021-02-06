@@ -16,13 +16,32 @@ async function criarUsuario () {
   return usuarioDados.body.usuarios[0]
 }
 
+async function excluirUsuario () {
+  let usuario
+  const rotaUsuarios = '/usuarios'
+  const usuarioExcluido = await testServer.delete(`${rotaUsuarios}/${usuario._id}`)
+    .send(usuario)
+  expect(usuarioExcluido.status).toBe(200)
+}
+
 function criarProduto () {
   return {
     nome: faker.lorem.words(),
     preco: faker.random.number(),
     descricao: faker.lorem.paragraph(),
-    quantidade: faker.random.number()
+    quantidade: 1
   }
 }
 
-module.exports = { criarUsuario, criarProduto }
+async function excluirProduto (token, id_produto) {
+  let produto
+  const rotaProdutos = '/produtos'
+  const produtoExcluido = await testServer.delete(`${rotaProdutos}/${id_produto}`)
+    .set({
+      Authorization: token
+    })
+    .send(produto)
+  expect(produtoExcluido.status).toBe(200)
+}
+
+module.exports = { criarUsuario, criarProduto, excluirUsuario, excluirProduto }

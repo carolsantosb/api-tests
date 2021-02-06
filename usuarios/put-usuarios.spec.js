@@ -1,5 +1,5 @@
 const testServer = require('../utils/testServer')
-const { criarUsuario } = require('../utils/index')
+const { criarUsuario, excluirUsuario } = require('../utils/index')
 const usuarioFixo = require('../utils/data.json')
 
 const rotaUsuarios = '/usuarios'
@@ -8,6 +8,9 @@ describe('Editar um usuário através da rota PUT', () => {
   let usuario
   beforeAll(async () => {
     usuario = await criarUsuario()
+  })
+  afterAll(async () => {
+    usuarioExcluido = await excluirUsuario()
   })
 
   it('Editar um usuário com sucesso', async () => {

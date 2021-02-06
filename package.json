@@ -30,6 +30,9 @@
   "standard": {
     "globals": [
       "beforeEach",
+      "beforeAll",
+      "afterAll",
+      "afterEach",
       "describe",
       "it",
       "request",
