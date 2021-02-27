@@ -16,9 +16,6 @@ describe('Cadastrar carrinho através da rota POST', () => {
           password: usuario.password
         })
     token = (login.body.authorization)
-    return token
-  })
-  beforeAll(async () => {
     produto = await criarProduto()
     const produtoCriado = await testServer.post(rotaProdutos)
       .set({

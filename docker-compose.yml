@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+
+  server:
+    image: node:12
+    command: npx serverest@latest
+    ports:
+      - "3000:3000"
+
+  tests:
+    image: node:12
+    working_dir: /app
+    command: npm test
+    volumes:
+      - .:/app
+    depends_on:
+      - server
+    links:
+      - server
