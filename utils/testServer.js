@@ -1,3 +1,3 @@
 const request = require('supertest')
 
-module.exports = request('http://localhost:3000')
+module.exports = request('http://server:3000')
